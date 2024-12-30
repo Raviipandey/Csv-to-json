@@ -13,6 +13,7 @@ export class UserController {
 
       const parser = new CsvParser(1000);
       const totalRecords = await parser.processCSVStream(req.file.path);
+      await parser.calculateAgeDistribution();
 
       fs.unlinkSync(req.file.path);
       res.status(200).json({
